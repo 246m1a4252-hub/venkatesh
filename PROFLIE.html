@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Portfolio</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Input Box */
+.form-box {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+input, textarea {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+button {
+  padding: 12px 25px;
+  background: #ff7eb3;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff4f91;
+  transform: scale(1.05);
+}
+
+/* Portfolio Card */
+.portfolio {
+  display: none;
+  margin-top: 30px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  margin: auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+h2 {
+  margin: 10px 0;
+}
+
+.section {
+  margin-top: 15px;
+  text-align: left;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+
+</head>
+<body>
+
+<h1>Interactive Portfolio Creator</h1>
+
+<div class="form-box">
+  <input type="text" id="name" placeholder="Your Name">
+  <textarea id="CERTIFICATES" placeholder="Your CERTIFICATES "></textarea>
+  <input type="text" id="skills" placeholder="Skills (comma separated)">
+  <input type="text" id="contact" placeholder="Email / Phone">
+  <input type="DOC" id="CERTIFICATES DONE" placeholder="Profile CERTIFICATES DONE URL">
+
+  <button onclick="createPortfolio()">Create Portfolio</button>
+</div>
+
+<div class="portfolio" id="portfolio">
+  <div class="card">
+    <img id="pImg" src="">
+    <h2 id="pName"></h2>
+    <p id="pBio"></p>
+
+    <div class="section">
+      <h3>Skills</h3>
+      <ul id="pSkills"></ul>
+    </div>
+
+    <div class="section">
+      <h3>Contact</h3>
+      <p id="pContact"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+function createPortfolio() {
+  let name = document.getElementById("name").value;
+  let bio = document.getElementById("bio").value;
+  let skills = document.getElementById("skills").value;
+  let contact = document.getElementById("contact").value;
+  let image = document.getElementById("image").value;
+
+  if (!name || !bio || !skills || !contact || !image) {
+    alert("Please fill all fields!");
+    return;
+  }
+
+  // Set values
+  document.getElementById("pName").innerText = name;
+  document.getElementById("pBio").innerText = bio;
+  document.getElementById("pContact").innerText = contact;
+  document.getElementById("pImg").src = image;
+
+  // Skills list
+  let skillsArray = skills.split(",");
+  let skillsList = document.getElementById("pSkills");
+  skillsList.innerHTML = "";
+
+  skillsArray.forEach(skill => {
+    let li = document.createElement("li");
+    li.innerText = skill.trim();
+    skillsList.appendChild(li);
+  });
+
+  // Show portfolio
+  document.getElementById("portfolio").style.display = "block";
+}
+</script>
+
+</body>
+</html>
